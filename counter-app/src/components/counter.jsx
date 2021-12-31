@@ -2,18 +2,22 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    count: 0,
+    count: 1,
   };
 
   render() {
     return (
       <div>
-        <span style={{ fontSize: 50 }} className="badge bg-primary m-2">
-          {this.formatCount()}
-        </span>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button className="btn btn-secondary btn-sm">Increment</button>
       </div>
     );
+  }
+
+  getBadgeClasses() {
+    let classes = "badge m-2 ";
+    classes += this.state.count === 0 ? "bg-warning" : "bg-primary";
+    return classes;
   }
 
   formatCount() {
