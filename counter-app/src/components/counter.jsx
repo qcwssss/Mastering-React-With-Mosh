@@ -4,15 +4,16 @@ class Counter extends Component {
   state = {
     count: 1,
     tags: ["tag1", "tag2", "tag3"],
-    // tags: [],
   };
 
-  handleIncrement() {
-    console.log("Increment Clicked", this);
-    // this
-    // obj.method() -> return obj
-    // stand alone function -> return window obj/undefined
-  }
+  // constructor() {
+  //   super();
+  //   this.handleIncrement = this.handleIncrement.bind(this);
+  // }
+
+  handleIncrement = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
 
   render() {
     return (
