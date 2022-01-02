@@ -36,7 +36,7 @@ class App extends Component {
     this.setState({ counters });
   };
 
-  return() {
+  render() {
     return (
       <React.Fragment>
         <Navbar />
