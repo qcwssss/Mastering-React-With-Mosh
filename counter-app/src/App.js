@@ -14,6 +14,11 @@ class App extends Component {
     ],
   };
 
+  constructor(props) {
+    super();
+    console.log("App - Constructor", props);
+  }
+
   handleIncrement = (counter) => {
     const counters = [...this.state.counters];
     const index = counters.indexOf(counter);
