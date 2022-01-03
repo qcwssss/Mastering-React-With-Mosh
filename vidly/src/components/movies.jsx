@@ -14,10 +14,11 @@ class Movies extends Component {
   };
 
   handleLike = (movie) => {
-    console.log("Like Clicked", movie);
-    if (movie.liked) movie.liked = false;
-    else movie.liked = false;
-    this.setState({ movie });
+    const movies = [...this.state.movies];
+    const index = movies.indexOf(movie);
+    movies[index] = { ...movie };
+    movies[index].liked = !movies[index].liked;
+    this.setState({ movies });
   };
 
   render() {
