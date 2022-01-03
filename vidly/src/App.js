@@ -3,6 +3,10 @@ import Movies from "./components/movies";
 import "./App.css";
 
 class App extends Component {
+  state = {
+    liked: false,
+  };
+
   render() {
     return (
       <main className="container">
