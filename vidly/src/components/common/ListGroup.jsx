@@ -2,8 +2,8 @@ import React from "react";
 import { genres } from "../../services/fakeGenreService";
 // genres.push({ _id: 1, name: "All Genres" });
 
-const Genres = (props) => {
-  const { currentGenre, onGenreChange } = props;
+const ListGroup = (props) => {
+  const { currentGenre, onItemSelect } = props;
   console.log(currentGenre);
   return (
     <ul className="list-group">
@@ -11,7 +11,7 @@ const Genres = (props) => {
         <li
           key={genre._id}
           className="list-group-item list-group-item-action"
-          onClick={() => onGenreChange(genre.name)}
+          onClick={() => onItemSelect(genre.name)}
         >
           {genre.name}
         </li>
@@ -20,4 +20,4 @@ const Genres = (props) => {
   );
 };
 
-export default Genres;
+export default ListGroup;
