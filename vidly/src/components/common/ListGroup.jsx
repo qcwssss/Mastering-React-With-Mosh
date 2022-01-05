@@ -1,23 +1,32 @@
 import React from "react";
-import { genres } from "../../services/fakeGenreService";
+// import { items } from "../../services/fakeGenreService";
 // genres.push({ _id: 1, name: "All Genres" });
 
 const ListGroup = (props) => {
-  const { currentGenre, onItemSelect } = props;
-  console.log(currentGenre);
+  const { items, textProperty, valueProperty, selectedItem, onItemSelect } =
+    props;
+
   return (
     <ul className="list-group">
-      {genres.map((genre) => (
+      {" "}
+      {items.map((item) => (
         <li
-          key={genre._id}
-          className="list-group-item list-group-item-action"
-          onClick={() => onItemSelect(genre.name)}
+          onClick={() => onItemSelect(item)}
+          key={item[valueProperty]}
+          className={
+            item === selectedItem ? "list-group-item active" : "list-group-item"
+          }
         >
-          {genre.name}
+          {item[textProperty]}
         </li>
       ))}
     </ul>
   );
+};
+
+ListGroup.defaultProps = {
+  valueProperty: "_id",
+  textProperty: "name",
 };
 
 export default ListGroup;
