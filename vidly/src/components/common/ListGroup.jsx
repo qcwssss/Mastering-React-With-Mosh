@@ -1,6 +1,4 @@
 import React from "react";
-// import { items } from "../../services/fakeGenreService";
-// genres.push({ _id: 1, name: "All Genres" });
 
 const ListGroup = (props) => {
   const { items, textProperty, valueProperty, selectedItem, onItemSelect } =
