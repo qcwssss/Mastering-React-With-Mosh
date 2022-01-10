@@ -7,8 +7,8 @@ class MoviesTable extends Component {
   columns = [
     { path: "title", label: "Title" },
     { path: "genre.name", label: "Genre" },
-    { path: "numberInStock", label: "Title" },
-    { path: "DailyRentalRate", label: "Rate" },
+    { path: "numberInStock", label: "Stock" },
+    { path: "dailyRentalRate", label: "Rate" },
     {
       key: "like",
       content: (movie) => (
@@ -29,8 +29,7 @@ class MoviesTable extends Component {
   ];
 
   render() {
-    const { movies, onDelete, onLike, sortColumn, onSort } = this.props;
-
+    const { movies, sortColumn, onSort } = this.props;
     return (
       <table className="table">
         <TableHeader
