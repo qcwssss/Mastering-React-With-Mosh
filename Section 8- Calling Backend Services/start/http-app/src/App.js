@@ -21,12 +21,22 @@ class App extends Component {
     this.setState({ posts });
   };
 
-  handleUpdate = (post) => {
-    console.log("Update", post);
+  handleUpdate = async (post) => {
+    post.title = "UPDATED";
+    await axios.put(apiEndPoints + "/" + post.id, post);
+    // axios.patch(apiEndPoints + "/" + post.id, { title: post.title });
+
+    const posts = [...this.state.posts];
+    const index = posts.indexOf(post);
+    post[index] = { ...post };
+    this.setState({ posts });
   };
 
-  handleDelete = (post) => {
-    console.log("Delete", post);
+  handleDelete = async (post) => {
+    await axios.delete(apiEndPoints + "/" + post.id);
+
+    const posts = this.state.posts.filter((p) => p.id !== post.id);
+    this.setState({ posts });
   };
 
   render() {
