@@ -2,20 +2,35 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
 
-const apiEndPoints = "https://jsonplaceholder.typicode.com/posts";
+axios.interceptors.response.use(null, (error) => {
+  const expectedError =
+    error.response &&
+    error.response.status >= 400 &&
+    error.response.status < 500;
+
+  if (!expectedError) {
+    console.log("Logging the error", error);
+    alert("An unexpected error occurred");
+  }
+
+  return Promise.reject(error);
+});
+
+const apiEndPoint = "https://jsonplaceholder.typicode.com/posts";
+
 class App extends Component {
   state = {
     posts: [],
   };
 
   async componentDidMount() {
-    const { data: posts } = await axios.get(apiEndPoints);
+    const { data: posts } = await axios.get(apiEndPoint);
     this.setState({ posts });
   }
 
   handleAdd = async () => {
     const obj = { title: "a", body: "b" };
-    const { data: post } = await axios.post(apiEndPoints, obj);
+    const { data: post } = await axios.post(apiEndPoint, obj);
 
     const posts = [post, ...this.state.posts];
     this.setState({ posts });
@@ -23,8 +38,7 @@ class App extends Component {
 
   handleUpdate = async (post) => {
     post.title = "UPDATED";
-    await axios.put(apiEndPoints + "/" + post.id, post);
-    // axios.patch(apiEndPoints + "/" + post.id, { title: post.title });
+    await axios.put(apiEndPoint + "/" + post.id, post);
 
     const posts = [...this.state.posts];
     const index = posts.indexOf(post);
@@ -39,13 +53,13 @@ class App extends Component {
     this.setState({ posts });
 
     try {
-      await axios.delete(apiEndPoints + "/" + post.id);
+      await axios.delete(apiEndPoint + "/33299" + post.id);
     } catch (ex) {
-      if (ex.response && ex.response.status === 404) {
+      console.log("HANDLE DELETE CATCH BLOCK");
+
+      if (ex.response && ex.response.status === 404)
         alert("This post has already been deleted.");
-      } else {
-        console.log("Logging the error", ex);
-        alert("An unexpected error occurred");
+      else {
       }
       this.setState({ posts: originalPosts });
     }
