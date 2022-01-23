@@ -15,6 +15,10 @@ class App extends Component {
     this.setState({ posts });
   }
 
+  methodDoesNotExist = () => {
+    throw new Error("Sentry error.");
+  };
+
   handleAdd = async () => {
     const obj = { title: "a", body: "b" };
     const { data: post } = await http.post(config.apiEndpoint, obj);
@@ -40,8 +44,7 @@ class App extends Component {
     this.setState({ posts });
 
     try {
-      // await http.delete(config.apiEndpoint + "/" + post.id);
-      await http.delete("s" + config.apiEndpoint + post.id);
+      await http.delete(config.apiEndpoint + "/" + post.id);
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
         alert("This post has already been deleted.");
@@ -53,6 +56,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <ToastContainer />
+        <button onClick={this.methodDoesNotExist}>Break the world</button>;
         <button className="btn btn-primary" onClick={this.handleAdd}>
           Add
         </button>
