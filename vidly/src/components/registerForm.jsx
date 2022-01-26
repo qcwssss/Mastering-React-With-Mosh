@@ -17,14 +17,11 @@ class RegisterForm extends Form {
 
   doSubmit = async () => {
     try {
-      const response = await userService.register(this.state.data);
-      console.log(response);
+      await userService.register(this.state.data);
     } catch (ex) {
-      console.log(">>>");
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
         errors.username = ex.response.data;
-        console.log("error yes");
 
         this.setState({ errors });
       }
