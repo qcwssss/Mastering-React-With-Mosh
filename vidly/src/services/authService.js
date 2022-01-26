@@ -4,5 +4,5 @@ import config from "../config.json";
 const apiEndpoint = config.apiUrl + "/auth";
 
 export function login(email, password) {
-  http.post(apiEndpoint, { email, password });
+  return http.post(apiEndpoint, { email, password });
 }
